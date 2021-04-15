@@ -1,6 +1,6 @@
 debug: true
 server:
-  port: 9999
+  port: 8843
   ssl:
     keyStore: file:/etc/cas/thekeystore
     keyStorePassword: changeit
@@ -26,14 +26,15 @@ logging:
 ---
 spring:
   profiles: cas
+sso-prefix: https://sso.baicaowei.cn:8443/cas/oauth2.0
 security:
   oauth2:
     client:
-      clientId: client
-      clientSecret: secret
-      accessTokenUri: https://mmoayyed.unicon.net:8443/cas/oauth2.0/accessToken
-      userAuthorizationUri: https://mmoayyed.unicon.net:8443/cas/oauth2.0/authorize
+      clientId: oauth_client_demo
+      clientSecret: oauth_client_demo_secret
+      accessTokenUri: ${sso-prefix}/accessToken
+      userAuthorizationUri: ${sso-prefix}/authorize
       clientAuthenticationScheme: form
     resource:
-      userInfoUri: https://mmoayyed.unicon.net:8443/cas/oauth2.0/profile
+      userInfoUri: ${sso-prefix}/profile
       preferTokenInfo: false
